@@ -1,18 +1,1160 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Junaid Farooq — Curriculum Vitae</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS VARIABLES & RESET
+           ======================================== */
+        :root {
+            --color-primary: #1f3348;
+            --color-primary-light: #2f4a68;
+            --color-accent: #0d9488;
+            --color-accent-soft: #ecf7f6;
+            --color-text: #1f2937;
+            --color-text-light: #475569;
+            --color-text-muted: #64748b;
+            --color-border: #d2dce8;
+            --color-border-light: #e8eef5;
+            --color-bg: #ffffff;
+            --color-bg-section: #f8fafc;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-serif: 'Source Serif 4', 'Georgia', serif;
+        }
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+        /* ========================================
+           PAGE & PRINT SETUP
+           ======================================== */
+        @page {
+            size: A4;
+            margin: 0;
+        }
 
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
+        html {
+            font-size: 11.2px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+        body {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            line-height: 1.58;
+            color: var(--color-text);
+            background: #edf2f7;
+        }
+
+        /* ========================================
+           CV CONTAINER
+           ======================================== */
+        .cv-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        }
+
+        @media print {
+            body { background: white; }
+            .cv-container {
+                max-width: 100%;
+                box-shadow: none;
+            }
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .cv-header {
+            background: linear-gradient(120deg, #243447 0%, #314a63 100%);
+            color: white;
+            padding: 30px 48px 24px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid #0d9488;
+        }
+
+        .cv-header::after {
+            content: none;
+        }
+
+        .cv-header::before {
+            content: none;
+        }
+
+        .header-name {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            margin-bottom: 3px;
+            position: relative;
+        }
+
+        .header-tagline {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #b7d3ee;
+            margin-bottom: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        .header-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 18px;
+            font-size: 0.96rem;
+            color: rgba(255,255,255,0.9);
+            position: relative;
+        }
+
+        .header-contact a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .header-contact a:hover {
+            color: white;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 0;
+        }
+
+        .contact-icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            opacity: 0.8;
+        }
+
+        /* ========================================
+           AT-A-GLANCE SUMMARY
+           ======================================== */
+        .scan-summary {
+            background: linear-gradient(180deg, #f8fbfd 0%, #f3f8fb 100%);
+            border-bottom: 1px solid var(--color-border);
+            padding: 14px 48px 16px;
+        }
+
+        .scan-summary-title {
+            font-size: 0.86rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 9px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid #d7e3ec;
+            border-radius: 3px;
+            padding: 11px 12px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .summary-value {
+            font-size: 1.07rem;
+            font-weight: 700;
+            color: #1f3348;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .summary-label {
+            font-size: 0.98rem;
+            color: #3f5368;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        .summary-note {
+            margin-top: 8px;
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+        }
+
+        /* ========================================
+           AREAS OF INTEREST BAR
+           ======================================== */
+        .interests-bar {
+            background: var(--color-accent-soft);
+            border-bottom: 1px solid var(--color-border-light);
+            padding: 14px 48px;
+        }
+
+        .interests-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .interests-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .interest-tag {
+            background: white;
+            color: var(--color-primary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 3px 12px;
+            border-radius: 100px;
+            border: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        /* ========================================
+           BODY CONTENT
+           ======================================== */
+        .cv-body {
+            padding: 0 48px 40px;
+        }
+
+        /* ========================================
+           SECTION STYLING
+           ======================================== */
+        .section {
+            padding-top: 26px;
+            padding-bottom: 4px;
+        }
+
+        .section + .section {
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .section-title {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            letter-spacing: 0.9px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 18px;
+            height: 2px;
+            background: var(--color-accent);
+            border-radius: 0;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           EDUCATION ENTRIES
+           ======================================== */
+        .edu-entry {
+            margin-bottom: 18px;
+            padding-left: 14px;
+            border-left: 2px solid var(--color-border-light);
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .edu-degree {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-text);
+        }
+
+        .edu-date {
+            font-size: 0.92rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .edu-field {
+            font-size: 1rem;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        .edu-institution {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            margin-top: 2px;
+        }
+
+        .edu-thesis {
+            font-size: 0.92rem;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .edu-desc {
+            font-size: 0.92rem;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           SKILLS SECTION
+           ======================================== */
+        .skills-group {
+            margin-bottom: 14px;
+        }
+
+        .skills-group-label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .skills-group-content {
+            font-size: 0.95rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .skills-qualifications li {
+            font-size: 0.98rem;
+            color: var(--color-text);
+            margin-bottom: 4px;
+            line-height: 1.5;
+            list-style: none;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .skills-qualifications li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .tools-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 4px;
+        }
+
+        .tool-tag {
+            background: var(--color-accent-soft);
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 2px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--color-border-light);
+        }
+
+        /* ========================================
+           WORK EXPERIENCE
+           ======================================== */
+        .exp-entry {
+            margin-bottom: 14px;
+            page-break-inside: avoid;
+            border: 1px solid #e0e8f0;
+            border-radius: 4px;
+            padding: 10px 12px;
+            background: #fff;
+        }
+
+        .exp-entry.current-role {
+            border-left: 4px solid var(--color-accent);
+            background: #f6fcfb;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
+
+        .exp-title {
+            font-weight: 700;
+            font-size: 1.13rem;
+            color: var(--color-text);
+        }
+
+        .exp-date {
+            font-size: 0.93rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .exp-company {
+            font-size: 1.01rem;
+            font-weight: 600;
+            color: #255277;
+        }
+
+        .exp-location {
+            font-size: 0.92rem;
+            color: var(--color-text-muted);
+        }
+
+        .exp-desc-short {
+            font-size: 0.97rem;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            font-style: normal;
+            line-height: 1.5;
+        }
+
+        .exp-responsibilities {
+            margin-top: 6px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-responsibilities li {
+            font-size: 0.96rem;
+            color: var(--color-text);
+            margin-bottom: 3px;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .exp-responsibilities li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            top: 1px;
+        }
+
+        .exp-role-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+
+        /* ========================================
+           PUBLICATIONS
+           ======================================== */
+        .pub-entry {
+            font-size: 0.96rem;
+            color: var(--color-text);
+            margin-bottom: 10px;
+            line-height: 1.55;
+            padding-left: 14px;
+            border-left: 2px solid var(--color-border-light);
+        }
+
+        .pub-entry .author-highlight {
+            font-weight: 600;
+        }
+
+        .pub-entry .journal {
+            font-style: italic;
+        }
+
+        .pub-entry .award-badge {
+            display: inline-block;
+            background: #fef3cd;
+            color: #856404;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 1px 8px;
+            border-radius: 3px;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+
+        .pub-doi {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            word-break: break-all;
+        }
+
+        /* ========================================
+           BOOK
+           ======================================== */
+        .book-entry {
+            background: var(--color-bg-section);
+            border: 1px solid var(--color-border-light);
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-size: 0.98rem;
+            line-height: 1.55;
+        }
+
+        .book-title {
+            font-weight: 700;
+            font-style: italic;
+            color: var(--color-primary);
+        }
+
+        .book-meta {
+            font-size: 0.88rem;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           CERTIFICATES & LISTS
+           ======================================== */
+        .cert-list, .award-list, .membership-list, .workshop-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cert-list li, .award-list li, .membership-list li {
+            font-size: 0.96rem;
+            color: var(--color-text);
+            margin-bottom: 5px;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .cert-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .award-list li::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #d4a017;
+            font-size: 0.85rem;
+        }
+
+        .membership-list li::before {
+            content: '•';
+            position: absolute;
+            left: 2px;
+            color: var(--color-accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ========================================
+           WORKSHOPS
+           ======================================== */
+        .workshop-entry {
+            margin-bottom: 10px;
+            padding-left: 14px;
+            border-left: 2px solid var(--color-border-light);
+        }
+
+        .workshop-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .workshop-details {
+            font-size: 0.94rem;
+            color: var(--color-text-light);
+        }
+
+        /* ========================================
+           OTHER SKILLS (LANGUAGES)
+           ======================================== */
+        .lang-group {
+            margin-bottom: 6px;
+        }
+
+        .lang-label {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--color-text);
+        }
+
+        .lang-list {
+            font-size: 0.98rem;
+            color: var(--color-text-light);
+        }
+
+        /* ========================================
+           PERSONAL INFO
+           ======================================== */
+        .personal-info {
+            display: flex;
+            gap: 32px;
+            font-size: 0.96rem;
+        }
+
+        .personal-item-label {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .personal-item-value {
+            color: var(--color-text-light);
+        }
+
+        /* ========================================
+           PRINT UTILITIES
+           ======================================== */
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            .cv-container {
+                font-size: 10.2px;
+            }
+            .cv-header {
+                padding: 24px 40px 18px;
+            }
+            .scan-summary {
+                padding: 11px 40px 12px;
+            }
+            .summary-grid {
+                gap: 6px;
+            }
+            .summary-card {
+                padding: 8px 10px;
+            }
+            .interests-bar {
+                padding: 12px 40px;
+            }
+            .cv-body {
+                padding: 0 40px 30px;
+            }
+            .section {
+                padding-top: 20px;
+            }
+            .exp-entry {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+
+        <!-- ======== HEADER ======== -->
+        <header class="cv-header">
+            <h1 class="header-name">Dr. Junaid Farooq</h1>
+            <div class="header-tagline">Chief Architect &amp; Vice President of Artificial Intelligence</div>
+            <div class="header-contact">
+                <span class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    (+91) 7006 123 338
+                </span>
+                <span class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <a href="mailto:hi@junaidfarooq.net">hi@junaidfarooq.net</a>
+                </span>
+                <span class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                    </svg>
+                    <a href="https://www.junaidfarooq.net" target="_blank">www.junaidfarooq.net</a>
+                </span>
+                <span class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    India
+                </span>
+            </div>
+        </header>
+
+        <section class="scan-summary">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-value">Executive Level</div>
+                    <div class="summary-label">Chief Architect &amp; VP of AI with hands-on platform ownership and leadership execution.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">10+ Years</div>
+                    <div class="summary-label">Artificial Intelligence, Machine Learning, and software engineering across research and production systems.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">8</div>
+                    <div class="summary-label">Peer-reviewed research publications demonstrating technical depth and long-term innovation capability.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">2</div>
+                    <div class="summary-label">Books authored, including applied AI architecture and AI-era cybersecurity thought leadership.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">GenAI Platform Leadership</div>
+                    <div class="summary-label">LLMs, RAG, semantic retrieval, and multi-agent systems designed for enterprise deployment and scale.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value">Business + Technical Alignment</div>
+                    <div class="summary-label">Direct collaboration with CEO, CTO, Product, and GTM leadership to drive AI outcomes tied to growth.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== BODY ======== -->
+        <div class="cv-body">
+
+            <!-- ——— EDUCATION ——— -->
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+
+                <div class="edu-entry">
+                    <div class="edu-header">
+                        <span class="edu-degree">PhD — Artificial Intelligence</span>
+                        <span class="edu-date">Dec 2019 – Dec 2023</span>
+                    </div>
+                    <div class="edu-institution">Artificial Intelligence Lab, Department of Electrical Engineering, National Institute of Technology Srinagar, India</div>
+                    <div class="edu-thesis">Thesis: Breaking Barriers in Forecasting: A Hybrid Deep Learning Approach to Spatiotemporal Dynamics</div>
+                    <div class="edu-desc">Developed novel deep neural network architectures to intelligently achieve faster computations for applications spanning scales and complexities. Research work mainly involves development and integration of various artificial intelligence techniques to achieve advances in computational intelligence with applications in NLP, generative modelling, and data science.</div>
+                </div>
+
+                <div class="edu-entry">
+                    <div class="edu-header">
+                        <span class="edu-degree">M.Tech — Electrical Engineering</span>
+                        <span class="edu-date">Aug 2017 – Jun 2019</span>
+                    </div>
+                    <div class="edu-institution">Department of Electrical Engineering, National Institute of Technology Srinagar, India</div>
+                    <div class="edu-thesis">Thesis: Adaptive-neuro fuzzy inference systems based frequency control of microgrid</div>
+                </div>
+
+                <div class="edu-entry">
+                    <div class="edu-header">
+                        <span class="edu-degree">B.Tech — Electrical Engineering</span>
+                        <span class="edu-date">Aug 2011 – Aug 2015</span>
+                    </div>
+                    <div class="edu-institution">Department of Electrical Engineering, National Institute of Technology Srinagar, India</div>
+                    <div class="edu-thesis">Thesis: Transient stability analysis of a multi-machine power system (Simulink modeling &amp; graphical animation)</div>
+                </div>
+            </section>
+
+            <!-- ——— SKILLS & QUALIFICATIONS ——— -->
+            <section class="section">
+                <h2 class="section-title">Skills &amp; Qualifications</h2>
+
+                <div class="skills-group">
+                    <div class="skills-group-label">Qualifications</div>
+                    <ul class="skills-qualifications">
+                        <li>10+ years of experience in Artificial Intelligence, Machine Learning, and Software Engineering, spanning research, enterprise platforms, and production-grade AI systems.</li>
+                        <li>Proven leadership in AI architecture and strategy, including end-to-end ownership of AI-native platforms, LLM systems, agentic workflows, and large-scale data infrastructure.</li>
+                        <li>Deep expertise in Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), semantic search, and multi-agent systems deployed in real-world production environments.</li>
+                        <li>Strong background in designing, training, fine-tuning, evaluating, and deploying AI/ML models, including transformer-based architectures (BERT, GPT, LLaMA and variants).</li>
+                        <li>Extensive experience building AI-native data pipelines for structured and unstructured data, handling high-volume, high-velocity datasets.</li>
+                        <li>Hands-on expertise with vector databases and search engines (Elasticsearch, Pinecone, Weaviate) and query routing strategies for scalable AI retrieval systems.</li>
+                        <li>Demonstrated capability in AI governance, evaluation frameworks, safety, and production quality standards across enterprise GenAI deployments.</li>
+                        <li>Strong proficiency in Python and modern ML stacks, with experience across research prototyping and production engineering.</li>
+                        <li>Experience with cloud-native AI systems on AWS and Microsoft Azure, including scalable deployment, orchestration, and MLOps practices.</li>
+                        <li>Solid understanding of CI/CD, MLOps, API design, and distributed systems, enabling reliable and scalable AI solutions.</li>
+                        <li>Proven people leadership: hiring, mentoring, scaling AI teams, and collaborating cross-functionally with Product, GTM, and executive leadership.</li>
+                        <li>Published author and researcher with peer-reviewed journal papers, conference publications, books, and patent-driven innovation.</li>
+                    </ul>
+                </div>
+
+                <div class="skills-group">
+                    <div class="skills-group-label">Programming Skills</div>
+                    <div class="tools-tags">
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Matlab &amp; Simulink</span>
+                        <span class="tool-tag">C++</span>
+                        <span class="tool-tag">SQL</span>
+                    </div>
+                </div>
+
+                <div class="skills-group">
+                    <div class="skills-group-label">Related Tools &amp; Frameworks</div>
+                    <div class="tools-tags">
+                        <span class="tool-tag">PyTorch</span>
+                        <span class="tool-tag">TensorFlow</span>
+                        <span class="tool-tag">Keras</span>
+                        <span class="tool-tag">LangChain</span>
+                        <span class="tool-tag">LlamaIndex</span>
+                        <span class="tool-tag">OpenAI</span>
+                        <span class="tool-tag">Rasa</span>
+                        <span class="tool-tag">NLTK</span>
+                        <span class="tool-tag">NumPy</span>
+                        <span class="tool-tag">SciPy</span>
+                        <span class="tool-tag">Scikit-learn</span>
+                        <span class="tool-tag">Pandas</span>
+                        <span class="tool-tag">Matplotlib</span>
+                        <span class="tool-tag">OpenCV</span>
+                        <span class="tool-tag">CUDA</span>
+                        <span class="tool-tag">Docker</span>
+                        <span class="tool-tag">Azure</span>
+                        <span class="tool-tag">Airflow</span>
+                        <span class="tool-tag">Redis</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ——— WORK EXPERIENCE ——— -->
+            <section class="section">
+                <h2 class="section-title">Work Experience <span style="font-family: var(--font-sans); font-size: 0.88rem; font-weight: 500; color: var(--color-text-muted); margin-left: 4px;">(Leadership trajectory)</span></h2>
+
+                <!-- Sprouts.ai -->
+                <div class="exp-entry current-role">
+                    <div class="exp-header">
+                        <span class="exp-title">Chief Architect &amp; Vice President of Artificial Intelligence</span>
+                        <span class="exp-date">Apr 2025 – Present</span>
+                    </div>
+                    <div class="exp-company">Sprouts.ai · Full-time</div>
+                    <div class="exp-location">Bengaluru, Karnataka, India · Remote &nbsp;·&nbsp; 11 Months</div>
+                    <div class="exp-desc-short">As Chief Architect and VP of AI, I lead the company's AI vision, architecture, and execution across data platforms, search, LLM systems, and agentic workflows.</div>
+                    <ul class="exp-responsibilities">
+                        <li>Own end-to-end AI strategy, platform architecture, and technical roadmap spanning data engineering, vector search, LLM systems, and agentic AI.</li>
+                        <li>Serve as the final technical authority for AI architecture, system design, and scalability.</li>
+                        <li>Lead and scale the AI organization, including hiring, mentoring, performance management, and long-term capability building.</li>
+                        <li>Partner closely with CEO, CTO, Product, and GTM leadership to align AI initiatives with revenue growth, customer outcomes, and business strategy.</li>
+                        <li>Drive the company-wide transition from AI-ready to AI-native systems, including autonomous workflows, retrieval-augmented generation (RAG), and decision automation.</li>
+                        <li>Own AI governance, evaluation frameworks, safety standards, and production quality across all generative AI deployments.</li>
+                        <li>Architect complex AI systems using modular pipelines, query routing, semantic retrieval, vector databases, and token-efficient LLM interfaces for multi-source document synthesis and real-time agent responses.</li>
+                        <li>Design and architect AI-native data pipelines for structured and unstructured data at scale.</li>
+                        <li>Lead the agentic AI initiative, enabling context-aware assistants with follow-up reasoning, long-term memory, and real-time decision-making across heterogeneous data sources.</li>
+                        <li>Architect and scale a multi-agent conversational platform powered by an AI search engine over large-scale, diverse data infrastructure.</li>
+                        <li>Establish iterative evaluation pipelines, including automated evaluations and human-in-the-loop assessment, to ensure reliability, transparency, and responsible AI usage.</li>
+                        <li>Lead applied research in AI, Machine Learning, and Computing, translating it into production-ready platform capabilities.</li>
+                        <li>Own the IP and patents strategy, identifying novel technical contributions and supervising patent filings.</li>
+                    </ul>
+                </div>
+
+                <!-- StartUs Insights -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Principal Machine Learning Architect &amp; Head of Artificial Intelligence</span>
+                        <span class="exp-date">Aug 2023 – May 2025</span>
+                    </div>
+                    <div class="exp-company">StartUs Insights</div>
+                    <div class="exp-location">Vienna, Austria &nbsp;·&nbsp; 1 Year, 10 Months</div>
+                    <div class="exp-desc-short">StartUs Insights provides a Big Data &amp; AI-powered SaaS platform for discovering over 5 million startups and scaleups globally. It offers tools for identifying emerging companies and technologies, serving 1,000+ corporate partners including Samsung, Nestlé, and Siemens Gamesa.</div>
+                    <div class="exp-role-label">Role and Responsibilities:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Leading the AI team to deploy and fine-tune LLMs and generative models, analyzing massive databases enhancing platform's capability in innovation discovery.</li>
+                        <li>Built a truly multi-agentic AI platform from scratch to production, powering innovation intelligence across the globe.</li>
+                        <li>Built a state-of-the-art AI semantic search engine.</li>
+                        <li>Spearheading the integration of advanced AI technologies, significantly improving data analysis and insights.</li>
+                        <li>Mentoring the AI team in advanced methodologies, fostering a culture of innovation and ensuring AI projects align with strategic business objectives.</li>
+                    </ul>
+                </div>
+
+                <!-- Genie AI -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Machine Learning Engineer &amp; Head, R&amp;D / Research Team Lead</span>
+                        <span class="exp-date">Mar 2023 – Aug 2023</span>
+                    </div>
+                    <div class="exp-company">Genie AI, INC</div>
+                    <div class="exp-location">Toronto, Canada &nbsp;·&nbsp; 6 Months</div>
+                    <div class="exp-desc-short">Lead the R&amp;D efforts of the team and work on the design, development, and implementation of machine learning architectures and NLP models for intuitive AI assistants (AI powered chatbot) and other AI applications.</div>
+                    <div class="exp-role-label">Role and Responsibilities:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Lead the R&amp;D Team to achieve the company's goals.</li>
+                        <li>Help develop NLP chatbot based on proprietary data sets using GPT and other LLMs.</li>
+                        <li>Train, test, and optimize NLP models to improve understanding and generation of natural language.</li>
+                        <li>Work closely with software engineers to integrate machine learning models into production systems.</li>
+                        <li>Ensure the scalability, reliability, and performance of machine learning and NLP components.</li>
+                        <li>Assist RPA engineering team to design, develop and implement RPA solutions to automate business processes.</li>
+                        <li>Assist and develop other automation and machine learning related requirements.</li>
+                        <li>Use LangChain, LLMs, and other AI/ML tools to achieve the above objectives.</li>
+                    </ul>
+                </div>
+
+                <!-- Senior Research Fellow -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Senior Research Fellow</span>
+                        <span class="exp-date">Dec 2021 – Dec 2024</span>
+                    </div>
+                    <div class="exp-company">National Institute of Technology Srinagar</div>
+                    <div class="exp-location">Artificial Intelligence Lab, Department of Electrical Engineering, India &nbsp;·&nbsp; 2 Years</div>
+                    <ul class="exp-responsibilities">
+                        <li>Responsibilities included research in deep learning and computational intelligence, in addition to teaching assistance for different undergraduate and postgraduate courses, both theory and lab.</li>
+                    </ul>
+                </div>
+
+                <!-- Junior Research Fellow -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Junior Research Fellow</span>
+                        <span class="exp-date">Dec 2019 – Dec 2021</span>
+                    </div>
+                    <div class="exp-company">National Institute of Technology Srinagar</div>
+                    <div class="exp-location">Artificial Intelligence Lab, Department of Electrical Engineering, India &nbsp;·&nbsp; 2 Years</div>
+                    <ul class="exp-responsibilities">
+                        <li>Responsibilities included research in deep learning and computational intelligence, in addition to teaching assistance for different undergraduate and postgraduate courses, both theory and lab.</li>
+                    </ul>
+                </div>
+
+                <!-- Comp Soft Solutions -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Machine Learning Engineer</span>
+                        <span class="exp-date">Jan 2017 – Dec 2019</span>
+                    </div>
+                    <div class="exp-company">Comp Soft Solutions</div>
+                    <div class="exp-location">Sopore, India &nbsp;·&nbsp; 3 Years</div>
+                    <div class="exp-desc-short">The company provides development, tech support, and training in a wide range of IT applications.</div>
+                    <div class="exp-role-label">Role and Responsibilities:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Design, development, training, testing, and deployment of Machine Learning systems.</li>
+                        <li>Tech support to clients.</li>
+                        <li>Technical Training.</li>
+                    </ul>
+                </div>
+
+                <!-- ETA-PCS -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Automation Engineer</span>
+                        <span class="exp-date">Oct 2015 – Dec 2016</span>
+                    </div>
+                    <div class="exp-company">ETA-PCS (A member of ETA STAR GROUP)</div>
+                    <div class="exp-location">Now renamed as AG PCS Switchgear Manufacturing LLC — Dubai, UAE &nbsp;·&nbsp; 1 Year, 3 Months</div>
+                    <div class="exp-role-label">Responsibilities and Achievements:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Design, integration, programming, site commissioning and site testing of Automation systems.</li>
+                        <li>Secured the highest paying on-campus placement of 2015 at NIT Srinagar during the final semester of B.Tech degree.</li>
+                        <li>Completed the company's training in a record time of two months, becoming the youngest engineer in ETA STAR group to be allocated a project.</li>
+                    </ul>
+                </div>
+
+                <!-- Editage -->
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Scientific Editor &amp; Reviewer (Freelancer)</span>
+                        <span class="exp-date">Since March 2021</span>
+                    </div>
+                    <div class="exp-company">Editage — Cactus Communications</div>
+                    <div class="exp-location">3 Years, 6 Months</div>
+                    <div class="exp-desc-short">A leading company that offers editing and reviewing services to researchers and authors around the globe.</div>
+                    <div class="exp-role-label">Role and Responsibilities:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Editing and scientific/technical review of research and technical papers in Artificial Intelligence and Engineering.</li>
+                        <li>Received multiple awards for high performance, productivity, and client satisfaction.</li>
+                        <li>Edited/Reviewed hundreds of research and technical papers.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ——— INTERNSHIP ——— -->
+            <section class="section">
+                <h2 class="section-title">Internship</h2>
+                <div class="exp-entry">
+                    <div class="exp-header">
+                        <span class="exp-title">Research Intern</span>
+                        <span class="exp-date">May 2023 (One month)</span>
+                    </div>
+                    <div class="exp-company">Quantum AI Global</div>
+                    <div class="exp-location">Edison, NJ, USA</div>
+                    <div class="exp-desc-short">The company provides AI-powered software platforms and quantum computing solutions with easy integration into existing systems in addition to providing consultancy services, training, and support in artificial intelligence technology to organizations.</div>
+                    <div class="exp-role-label">Role and Responsibilities:</div>
+                    <ul class="exp-responsibilities">
+                        <li>Design and development of AI based products.</li>
+                        <li>Conduct research that evolves into development of Intellectual Property Rights for the company.</li>
+                        <li>Lead and conduct training sessions in AI for the company and its subsidiaries.</li>
+                        <li>Research in quantum computing.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ——— BOOKS AUTHORED ——— -->
+            <section class="section">
+                <h2 class="section-title">Books Authored <span style="font-family: var(--font-sans); font-size: 0.88rem; font-weight: 400; color: var(--color-text-muted); margin-left: 4px;">(2)</span></h2>
+                <div class="book-entry">
+                    <span class="book-title">"The Art of Code: Tactics and Principles of Clean Code and Architecture"</span>
+                    <br>by Dr. Junaid Farooq, 2024
+                    <div class="book-meta">ASIN: B0DMT12M58 &nbsp;·&nbsp; UNSPSC-Code: 55111500 &nbsp;·&nbsp; Print Length: 276 Pages &nbsp;·&nbsp; <a href="https://www.amazon.com/Art-Code-Tactics-Principles-Architecture-ebook/dp/B0DMT12M58" target="_blank" style="color: var(--color-accent); text-decoration: none; font-weight: 600;">Available on Amazon</a></div>
+                </div>
+
+                <div class="book-entry" style="margin-top: 14px;">
+                    <span class="book-title">"ZERO DAY: The Invisible War — Mastering Vulnerability in the Age of Artificial Intelligence"</span>
+                    <br>by Dr. Junaid Farooq, 2025
+                    <div class="book-meta">ISBN: 979-8276520100 &nbsp;·&nbsp; Covers AI-driven vulnerability discovery, modern exploitation techniques, post-exploitation in the AI era, defense &amp; resilience, and the zero-day economy &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0G4GQC9W6" target="_blank" style="color: var(--color-accent); text-decoration: none; font-weight: 600;">Available on Amazon</a></div>
+                </div>
+            </section>
+
+            <!-- ——— RESEARCH PUBLICATIONS ——— -->
+            <section class="section">
+                <h2 class="section-title">Research Publications <span style="font-family: var(--font-sans); font-size: 0.88rem; font-weight: 400; color: var(--color-text-muted); margin-left: 4px;">(8)</span></h2>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span>, Danish Rafiq, Pantelis R. Vlachas, and Mohammad Abid Bazaz (2024). RefreshNet: Learning Multiscale Dynamics through Hierarchical Refreshing. <span class="journal">Nonlinear Dyn</span> (2024).
+                    <br><span class="pub-doi">https://doi.org/10.1007/s11071-024-09813-3</span>
+                </div>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span> &amp; Mohammad Abid Bazaz. (2023). Multiscale Autoencoder-RNN Architecture for Mitigating Error Accumulation in Long-Term Forecasting. Accepted for presentation at <span class="journal">2023 International Conference on Emerging Techniques in Computational Intelligence</span>, Hyderabad, 21–22 Sep. 2023.
+                    <span class="award-badge">Best Presentation Award</span>
+                </div>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span> &amp; Mohammad Abid Bazaz. (2023). Deep Learning based Adaptive Predictive Control of Radar-Guided Missile. <span class="journal">Defence Science Journal</span>.
+                    <br><span class="pub-doi">https://doi.org/10.14429/dsj.73.18481</span>
+                </div>
+
+                <div class="pub-entry">
+                    Danish Rafiq, <span class="author-highlight">Junaid Farooq</span>, &amp; Mohammad Abid Bazaz. (2021). Synergistic use of Intrusive and Non-intrusive Model Order Reduction Techniques for Dynamical Power Grids. <span class="journal">International Journal of Electrical Power &amp; Energy Systems</span>, 138, 107908.
+                    <br><span class="pub-doi">doi.org/10.1016/j.ijepes.2021.107908</span>
+                </div>
+
+                <div class="pub-entry">
+                    Manzoor A. Wani, <span class="author-highlight">Junaid Farooq</span>, &amp; Danish Mushtaq Wani (2021). Risk assessment of COVID-19 pandemic using deep learning model for J&amp;K in India: a district level analysis. <span class="journal">Environmental Science and Pollution Research</span>, 1-11.
+                    <br><span class="pub-doi">doi.org/10.1007/s11356-021-17046-9</span>
+                </div>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span> &amp; Mohammad Abid Bazaz. (2021). Deep Learning for Self-tuning of Control systems. In <span class="journal">2021 International Conference on Emerging Techniques in Computational Intelligence (ICETCI)</span> (pp. 6-11). IEEE. (IEEE Computational Intelligence Society), August 25-27, 2021.
+                    <span class="award-badge">Best Paper Award</span>
+                    <br><span class="pub-doi">doi.org/10.1109/ICETCI51973.2021.9574048</span>
+                </div>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span> &amp; Mohammad Abid Bazaz. (2021). A Deep Learning algorithm for modeling and forecasting of COVID-19 in five worst affected states of India. <span class="journal">Alexandria Engineering Journal</span>.
+                    <br><span class="pub-doi">doi.org/10.1016/j.aej.2020.09.037</span>
+                </div>
+
+                <div class="pub-entry">
+                    <span class="author-highlight">Junaid Farooq</span> &amp; Mohammad Abid Bazaz. (2020). A novel adaptive deep learning model of Covid-19 with focus on mortality reduction strategies. <span class="journal">Chaos, Solitons &amp; Fractals</span>, 138, 110148.
+                    <br><span class="pub-doi">doi.org/10.1016/j.chaos.2020.110148</span>
+                </div>
+            </section>
+
+            <!-- ——— CERTIFICATES ——— -->
+            <section class="section">
+                <h2 class="section-title">Certificates <span style="font-family: var(--font-sans); font-size: 0.88rem; font-weight: 400; color: var(--color-text-muted); margin-left: 4px;">(13)</span></h2>
+                <ul class="cert-list">
+                    <li>Deep Learning Specialization — Coursera (deeplearning.ai)</li>
+                    <li>Neural Networks and Deep Learning — Coursera (deeplearning.ai)</li>
+                    <li>Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization — Coursera (deeplearning.ai)</li>
+                    <li>Structuring Machine Learning Projects — Coursera (deeplearning.ai)</li>
+                    <li>Convolutional Neural Networks — Coursera (deeplearning.ai)</li>
+                    <li>Sequence Models — Coursera (deeplearning.ai)</li>
+                    <li>Modern Robotics, Course 1: Foundations of Robot Motion — Coursera (Northwestern University)</li>
+                    <li>Covid-19 Outbreak: Prediction, Forecasting, Data Analysis and Data Visualization — EduxLabs (April 2020)</li>
+                    <li>A deep understanding of deep learning (with Python intro) — Udemy</li>
+                    <li>ChatBots: Messenger ChatBot - DialogFlow and nodejs — Udemy</li>
+                    <li>Complete Chatbot Course Using Rasa Framework &amp; Python — Udemy</li>
+                    <li>Natural Language Processing with Python — Udemy</li>
+                    <li>The Complete SQL Bootcamp — Udemy</li>
+                </ul>
+            </section>
+
+            <!-- ——— WORKSHOPS ——— -->
+            <section class="section">
+                <h2 class="section-title">Workshops <span style="font-family: var(--font-sans); font-size: 0.88rem; font-weight: 400; color: var(--color-text-muted); margin-left: 4px;">(3)</span></h2>
+
+                <div class="workshop-entry">
+                    <div class="workshop-title">Brain, Computation, and Learning (BCL)</div>
+                    <div class="workshop-details">Department of Electrical Engineering, Indian Institute of Science, Bengaluru (January 9–13, 2023)<br>An intensive workshop on integration of artificial intelligence, computational neuroscience, and neurobiology.</div>
+                </div>
+
+                <div class="workshop-entry">
+                    <div class="workshop-title">GPU Tutorial on Artificial Intelligence and Data Science — NVIDIA</div>
+                    <div class="workshop-details">Hyderabad, India (24 August, 2021)</div>
+                </div>
+
+                <div class="workshop-entry">
+                    <div class="workshop-title">Power Electronics: Applications in Renewable Energy Systems</div>
+                    <div class="workshop-details">One-week workshop, NIT Srinagar, India (May 2019)</div>
+                </div>
+            </section>
+
+            <!-- ——— OTHER SKILLS ——— -->
+            <section class="section">
+                <h2 class="section-title">Other Skills</h2>
+                <div class="lang-group">
+                    <span class="lang-label">Languages:</span>
+                </div>
+                <div class="lang-group">
+                    <span class="lang-label">Fluent:</span>
+                    <span class="lang-list">English, Urdu, Kashmiri, Hindi, Arabic</span>
+                </div>
+                <div class="lang-group">
+                    <span class="lang-label">Basic level / beginner:</span>
+                    <span class="lang-list">Turkish, Persian, Russian</span>
+                </div>
+            </section>
+
+            <!-- ——— AWARDS & ACHIEVEMENTS ——— -->
+            <section class="section">
+                <h2 class="section-title">Awards &amp; Achievements</h2>
+                <ul class="award-list">
+                    <li>Received <strong>Best Paper Award</strong> for presenting the paper entitled <em>"Deep Learning for Self-Tuning of Control Systems"</em> at the "International Conference on Emerging Techniques in Computational Intelligence (ICETCI 2021)" organized by <strong>IEEE Computational Intelligence Society, Mahindra University, NVIDIA,</strong> and <strong>Tech Mahindra</strong> at Hyderabad, India, during 25–27 August, 2021.</li>
+                    <li>International Fellowship in Engineering Studies (2011–2015); IDB Jeddah</li>
+                    <li>Fellowship for M.Tech from Ministry of Human Resources Development (Now renamed as Ministry of Education), Government of India, August 2017 – June 2019.</li>
+                    <li>Research Fellowship for PhD from Ministry of Human Resources Development (Now renamed as Ministry of Education), Government of India – Since December 2019.</li>
+                </ul>
+            </section>
+
+            <!-- ——— MEMBERSHIPS ——— -->
+            <section class="section">
+                <h2 class="section-title">Memberships</h2>
+                <ul class="membership-list">
+                    <li>IEEE Graduate Student Member (# 97518796)</li>
+                    <li>IEEE Computer Society</li>
+                </ul>
+            </section>
+
+            <!-- ——— PERSONAL INFORMATION ——— -->
+            <section class="section">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="personal-info">
+                    <div>
+                        <span class="personal-item-label">Nationality:</span>
+                        <span class="personal-item-value">Indian</span>
+                    </div>
+                    <div>
+                        <span class="personal-item-label">Date of Birth:</span>
+                        <span class="personal-item-value">25 August 1994</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>
